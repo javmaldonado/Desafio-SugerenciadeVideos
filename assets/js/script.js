@@ -1,5 +1,4 @@
 // 1.Módulo IIFE utilizando ES6, esta función se ejecuta inmediatamente después de ser definida. Encierra el código en un ámbito privado//
-
 const showVideo = (() => {
   //Esta función privada cambia el atributo src del elemento con el id especificado, estableciéndolo en la URL del video//
   function insertVideoUrl(url, id) {
@@ -43,30 +42,16 @@ class Reproductor extends Multimedia {
   }
   //Este método utiliza videoBox.moduleVideo para configurar la URL del iframe con la url del video actual.//
   playMultimedia() {
-    videoBox.playVideo(this.url, this.#id);
+    showVideo.playVideo(this.url, this.#id);
   }
   //Modifica la URL para incluir un parámetro de inicio (start) y llama a moduleVideo para actualizar el iframe.//
   setInicio(tiempo) {
-    `${this.url}&start=${tiempo}`;
+   const newURL = `${this.url}&start=${tiempo}`;
     showVideo.playVideo(`${this.url}&start=${tiempo}`, this.#id);
   }
 }
 
-//4.Instancias de Reproductor para música, película y serie, cada una con su URL (link embed de Youtube) y el ID del iframe ("musica,peliculas,series") correspondiente.//
-showVideo.playVideo(
-  "https://www.youtube.com/embed/-6G6AW7oApA?si=4Tq-K4vSCMy6P_FB",
-  "musica"
-);
-showVideo.playVideo(
-  "https://www.youtube.com/embed/eZYkNkL7VFo?si=oRb29xHP5K8E2w0v",
-  "peliculas"
-);
-showVideo.playVideo(
-  "https://www.youtube.com/embed/ZHZG6UArE3I?si=ADSPY9-26D_ytWoY",
-  "series"
-);
-
-//Instanciar las clases hijas con las URLs y los IDs de los iframes//
+//4.Instanciar las clases hijas con las URLs y los IDs de los iframes//
 const musica = new Reproductor(
   "https://www.youtube.com/embed/-6G6AW7oApA?si=4Tq-K4vSCMy6P_FB",
   "musica"
@@ -87,3 +72,7 @@ serie.playMultimedia();
 
 // 6.Usar el método setInicio para modificar el tiempo de inicio del video de música, este inicia al segundo 30) //
 musica.setInicio(30);
+
+
+
+//Me di cuenta que tenia dos archivos JS con distintos codigos asi que me quede con uno, comente las lineas que me mencionaste y claro se rompe el codigo. Lo solucione eleminando las lineas redundantes antes de las instancias de new Reproductor y arregle el playMultimedia que estaba con la variable erronea, hora corre sin problema, creo... jajaja.
